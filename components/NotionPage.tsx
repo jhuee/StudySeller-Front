@@ -214,14 +214,14 @@ export const NotionPage: React.FC<types.PageProps> = ({
   }
 
   const title = getBlockTitle(block, recordMap) || site.name
-
+  console.log()
   console.log('notion page', {
     isDev: config.isDev,
     title,
     pageId,
     rootNotionPageId: site.rootNotionPageId,
-    recordMap
-  })
+    recordMap,
+  }, block?.id)
 
   if (!config.isServer) {
     // add important objects to the window global for easy debugging
@@ -244,7 +244,9 @@ export const NotionPage: React.FC<types.PageProps> = ({
   const socialDescription =
     getPageProperty<string>('Description', block, recordMap) ||
     config.description
-
+  
+  const price = getPageProperty<number>('Price', block, recordMap) || 0
+  console.log(price)
   return (
     <>
       <PageHead
@@ -264,16 +266,16 @@ export const NotionPage: React.FC<types.PageProps> = ({
           styles.notion,
           pageId === site.rootNotionPageId && 'index-page'
         )}
-        darkMode={isDarkMode}
+        darkMode={isDarkMode} //다크모드
         components={components}
         recordMap={recordMap}
-        rootPageId={site.rootNotionPageId}
+        rootPageId={site.rootNotionPageId} //workspace id
         rootDomain={site.domain}
-        fullPage={!isLiteMode}
+        fullPage={!isLiteMode} // css관련인 거 같음
         previewImages={!!recordMap.preview_images}
         showCollectionViewDropdown={false}
         showTableOfContents={showTableOfContents}
-        minTableOfContentsItems={minTableOfContentsItems}
+        minTableOfContentsItems={minTableOfContentsItems} //aside
         defaultPageIcon={config.defaultPageIcon}
         defaultPageCover={config.defaultPageCover}
         defaultPageCoverPosition={config.defaultPageCoverPosition}

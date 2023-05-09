@@ -69,4 +69,5 @@ export interface NotionPageInfo {
   author: string
   authorImage: string
   detail: string
+  price: number
 }

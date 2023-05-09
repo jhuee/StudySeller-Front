@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     if (!isBlogPost) {
       continue
     }
-
+    const price = getPageProperty<number>('Price', block, recordMap)
     const title = getBlockTitle(block, recordMap) || config.name
     const description =
       getPageProperty<string>('Description', block, recordMap) ||
@@ -75,6 +75,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       title,
       url,
       date,
+      price,
       description,
       enclosure: socialImageUrl
         ? {

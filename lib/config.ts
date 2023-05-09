@@ -4,7 +4,7 @@
  * This file pulls from the root "site.config.ts" as well as environment variables
  * for optional depenencies.
  */
-import { parsePageId } from 'notion-utils'
+import { getPageProperty, parsePageId } from 'notion-utils'
 import { PostHogConfig } from 'posthog-js'
 
 import { getEnv, getSiteConfig } from './get-config-value'
@@ -52,6 +52,7 @@ export const author: string = getSiteConfig('author')
 export const domain: string = getSiteConfig('domain')
 export const description: string = getSiteConfig('description', 'Notion Blog')
 export const language: string = getSiteConfig('language', 'en')
+// export const price: number | null = getSiteConfig('number')
 
 // social accounts
 export const twitter: string | null = getSiteConfig('twitter', null)
@@ -193,6 +194,7 @@ function cleanPageUrlMap(
     }
 
     if (!uri.startsWith('/')) {
+      alert("찾았따!")
       throw new Error(
         `Invalid ${label} value for page "${pageId}": value "${uri}" should be a relative URI that starts with "/"`
       )
@@ -212,7 +214,7 @@ function invertPageUrlOverrides(
 ): PageUrlOverridesInverseMap {
   return Object.keys(pageUrlOverrides).reduce((acc, uri) => {
     const pageId = pageUrlOverrides[uri]
-
+    
     return {
       ...acc,
       [pageId]: uri

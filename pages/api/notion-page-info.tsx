@@ -49,7 +49,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const isBlogPost =
     block.type === 'page' && block.parent_table === 'collection'
   const title = getBlockTitle(block, recordMap) || libConfig.name
-
+  
   const imageCoverPosition =
     (block as PageBlock).format?.page_cover_position ??
     libConfig.defaultPageCoverPosition
@@ -77,7 +77,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const author =
     getPageProperty<string>('Author', block, recordMap) || libConfig.author
-
   // const socialDescription =
   //   getPageProperty<string>('Description', block, recordMap) ||
   //   libConfig.description
@@ -101,7 +100,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         })} ${datePublished.getFullYear()}`
       : undefined
   const detail = date || author || libConfig.domain
-
+  // const price = getPageProperty<number>('Price', block, recordMap) || libConfig.price
   const pageInfo: NotionPageInfo = {
     pageId,
     title,
@@ -109,7 +108,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     imageObjectPosition,
     author,
     authorImage,
-    detail
+    detail,
+    price
   }
 
   res.setHeader(
