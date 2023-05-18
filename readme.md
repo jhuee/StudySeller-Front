@@ -5,7 +5,7 @@
 
 # StudySeller 🍀
 <p align="center">
-  <img src="!https://github.com/jhuee/StudySeller-Front/assets/84782877/b7dccc11-9196-45d2-a274-dded2faadb65">
+  <img src="https://github.com/jhuee/StudySeller-Front/assets/84782877/b7dccc11-9196-45d2-a274-dded2faadb65">
 </p>
 
 ## Notion
