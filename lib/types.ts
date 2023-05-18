@@ -37,6 +37,7 @@ export interface Site {
   // opengraph metadata
   description?: string
   image?: string
+  number?: number
 }
 
 export interface SiteMap {
@@ -71,3 +72,4 @@ export interface NotionPageInfo {
   detail: string
   price: number
 }
+

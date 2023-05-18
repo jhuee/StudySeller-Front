@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import cs from 'classnames'
-import { PageBlock } from 'notion-types'
+import { PageBlock } from 'notion-types'  
 import { formatDate, getBlockTitle, getPageProperty } from 'notion-utils'
 import BodyClassName from 'react-body-classname'
 import { NotionRenderer } from 'react-notion-x'
@@ -26,7 +26,15 @@ import { NotionPageHeader } from './NotionPageHeader'
 import { Page404 } from './Page404'
 import { PageAside } from './PageAside'
 import { PageHead } from './PageHead'
+import   Login  from './Login'
+import SignUp from './SignUp'
+import ListPage from './UserList'
 import styles from './styles.module.css'
+
+import axios from 'axios';
+
+// 검색을 할 때, Tag위주로 검색하기
+// 태그의 속성들을 가져와서 
 
 // -----------------------------------------------------------------------------
 // dynamic imports for optional components
@@ -97,10 +105,12 @@ const Modal = dynamic(
   }
 )
 
+//트위터
 const Tweet = ({ id }: { id: string }) => {
   return <TweetEmbed tweetId={id} />
 }
 
+//마지막 수정시간 값
 const propertyLastEditedTimeValue = (
   { block, pageHeader },
   defaultFn: () => React.ReactNode
@@ -114,6 +124,7 @@ const propertyLastEditedTimeValue = (
   return defaultFn()
 }
 
+//작성 날짜
 const propertyDateValue = (
   { data, schema, pageHeader },
   defaultFn: () => React.ReactNode
@@ -131,6 +142,7 @@ const propertyDateValue = (
   return defaultFn()
 }
 
+//글쓴사람
 const propertyTextValue = (
   { schema, pageHeader },
   defaultFn: () => React.ReactNode
@@ -144,10 +156,10 @@ const propertyTextValue = (
 
 
 export const NotionPage: React.FC<types.PageProps> = ({
-  site,
-  recordMap,
+  site, //site에 대한 것
+  recordMap, //여러가지 깔리는 블록에 대한 것
   error,
-  pageId
+  pageId, //
 }) => {
   const router = useRouter()
   console.log(router)
@@ -176,25 +188,31 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   const { isDarkMode } = useDarkMode()
 
+  const keys = Object.keys(recordMap?.block || {})
+  const block = recordMap?.block?.[keys[0]]?.value
+
+
+//개인 노션 페이지에 있는 블로그 글(단순한 텍스트 같은 블록 말고) URL을 매핑하는 함수
+//site, recordMap, searchParams가 파라미터로 들어가고 있음
+
   const siteMapPageUrl = React.useMemo(() => {
     const params: any = {}
     if (lite) params.lite = lite
-
     const searchParams = new URLSearchParams(params)
     return mapPageUrl(site, recordMap, searchParams)
-  }, [site, recordMap, lite])
+}, [site, recordMap, lite])
 
-  const keys = Object.keys(recordMap?.block || {})
-  const block = recordMap?.block?.[keys[0]]?.value
 
   // const isRootPage =
   //   parsePageId(block?.id) === parsePageId(site?.rootNotionPageId)
   const isBlogPost =
     block?.type === 'page' && block?.parent_table === 'collection'
 
+
   const showTableOfContents = !!isBlogPost
   const minTableOfContentsItems = 3
 
+ 
   const pageAside = React.useMemo(
     () => (
       <PageAside block={block} recordMap={recordMap} isBlogPost={isBlogPost} />
@@ -208,19 +226,26 @@ export const NotionPage: React.FC<types.PageProps> = ({
     return <Loading />
   }
 
-  if (error || !site || !block) {
+  if (error ) {
     console.log(error)
-    return <Page404 site={site} pageId={pageId} error={error} />
+    // return <<Page404 site={site} pageId={pageId} error={error} />>
+    if(router.asPath === '/signup' ){
+      return<SignUp></SignUp>
+    } else if(router.asPath === '/login'){
+    return<Login></Login>
+    } else if(router.asPath === '/list')
+      return<ListPage></ListPage>
   }
 
   const title = getBlockTitle(block, recordMap) || site.name
+
   console.log()
   console.log('notion page', {
     isDev: config.isDev,
     title,
     pageId,
     rootNotionPageId: site.rootNotionPageId,
-    recordMap,
+    recordMap, 
   }, block?.id)
 
   if (!config.isServer) {
@@ -240,13 +265,15 @@ export const NotionPage: React.FC<types.PageProps> = ({
       config.defaultPageCover,
     block
   )
+  
 
   const socialDescription =
     getPageProperty<string>('Description', block, recordMap) ||
     config.description
-  
-  const price = getPageProperty<number>('Price', block, recordMap) || 0
-  console.log(price)
+
+
+
+
   return (
     <>
       <PageHead

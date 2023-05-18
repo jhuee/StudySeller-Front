@@ -194,7 +194,6 @@ function cleanPageUrlMap(
     }
 
     if (!uri.startsWith('/')) {
-      alert("찾았따!")
       throw new Error(
         `Invalid ${label} value for page "${pageId}": value "${uri}" should be a relative URI that starts with "/"`
       )

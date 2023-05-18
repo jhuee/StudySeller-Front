@@ -31,6 +31,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   }
 }
 
+//sitemap(workspace block 표시 같음)
 const createSitemap = (siteMap: SiteMap) =>
   `<?xml version="1.0" encoding="UTF-8"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
