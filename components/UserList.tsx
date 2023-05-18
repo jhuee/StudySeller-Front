@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, List, Segment, Menu, Dropdown, Input, Button } from 'semantic-ui-react';
+import { Image, List, Segment, Menu, Dropdown, Input, Button,Header } from 'semantic-ui-react';
 import { PageSocial } from './PageSocial';
 import * as config from '@/lib/config'
 import * as types from '@/lib/types'
@@ -75,7 +75,7 @@ export const ListExampleCelled: React.FC<types.PageProps> = ({
         console.error(error);
     });
 return (
-<Segment.Group size='massive'>
+<Segment.Group style={{height:800}}>
 <Segment>
       <Menu style={{ backgroundColor: 'transparent', paddingTop: '3px' }} stackable inverted size='massive' fixed='top'>
         <Menu.Item style={{ fontSize: '20px', color: 'grey' }}>StudySeller</Menu.Item>
@@ -123,26 +123,49 @@ return (
           </Menu.Item>
         </Menu.Menu>
       </Menu>
-      <Segment style={{ marginTop : 200}}>
-      <List celled>
-    <List.Item>
-      <Image avatar src='/images/avatar/small/helen.jpg' />
-      <List.Content>
-        <List.Header>Snickerdoodle</List.Header>
-        An excellent companion
+      <Header as='h1' style={{marginTop: 100, paddingLeft :70}} >둘러보기🍀</Header>
+      <Segment style={{marginRight:70 ,marginTop : 80, marginLeft: 70}} padded='very' size='big'>
+      <List animated celled size='large'>
+    <List.Item v>
+      <Image size='mini' avatar src='http://localhost:3000/_next/image?url=https%3A%2F%2Fwww.notion.so%2Fimage%2Fhttps%253A%252F%252Fs3-us-west-2.amazonaws.com%252Fsecure.notion-static.com%252F6bd65d9f-b9af-432b-b06e-da596b40a2e4%252FIMG_7646.jpeg%3Ftable%3Dblock%26id%3Da684bdd9-8f5c-4ba0-bb93-252569b64cdd%26cache%3Dv2&w=2048&q=75' />
+      <List.Content style={{paddigTop:10}} >
+        <List.Header>Juhee's Notion</List.Header>
+        <List.Description>쮜의 코딩 일기입니당</List.Description>
       </List.Content>
     </List.Item>
     <List.Item>
-      <Image avatar src='/images/avatar/small/daniel.jpg' />
+      <Image avatar src='배경핑크클로버.png' />
       <List.Content>
-        <List.Header>Poodle</List.Header>A poodle, it's pretty basic
+        <List.Header>HAMBA's Notion</List.Header>
+        <List.Description>쮜쫄병 한비님의 노션이올시다.</List.Description>
       </List.Content>
     </List.Item>
     <List.Item>
-      <Image avatar src='/images/avatar/small/daniel.jpg' />
+      <Image avatar src='에어팟햄.png' />
       <List.Content>
-        <List.Header>Paulo</List.Header>
-        He's also a dog
+        <List.Header>A-Yeon</List.Header>
+        인하공업전문대학 컴퓨터시스템과20
+      </List.Content>
+    </List.Item>
+    <List.Item>
+      <Image avatar src='배경핑크클로버.png' />
+      <List.Content>
+        <List.Header>Jinu's Notion</List.Header>
+        인하공업전문대학 컴퓨터시스템과19 #React
+      </List.Content>
+    </List.Item>
+    <List.Item>
+      <Image avatar src='에어팟햄.png' />
+      <List.Content>
+        <List.Header>Minjuni's Notion</List.Header>
+        인하공업전문대학 컴퓨터시스템과19 #BackEnd
+      </List.Content>
+    </List.Item>
+    <List.Item>
+      <Image avatar src='에어팟햄.png' />
+      <List.Content>
+        <List.Header>하힘들다</List.Header>
+        인하공업전문대학 컴퓨터시스템과19 #BackEnd
       </List.Content>
     </List.Item>
   </List>

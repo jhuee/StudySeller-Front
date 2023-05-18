@@ -83,7 +83,7 @@ const App: React.FC <types.PageProps> = ({
           </Menu.Item>
         </Menu.Menu>
       </Menu>
-      <Image src='mainPage.jpg' href='/' style={{ width: 'auto', height: 'auto', paddingRight: -10 }} />
+      <Image src='mainPage.png' href='/' style={{ width: 'auto', height: 'auto', paddingRight: -10 }} />
     </Segment>
   );
 };
