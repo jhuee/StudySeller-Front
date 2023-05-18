@@ -8,23 +8,39 @@ import { Site, NotionPageInfo } from './types'
 //page의 속성을 가져오기 위해 import함
 import { getPageProperty } from 'notion-utils'
 import { getPage } from './notion'
+import axios from 'axios'
+import { url } from 'inspector'
 
 
 // include UUIDs in page URLs during local development but not in production
 // (they're nice for debugging and speed up local dev)
 const uuid = !!includeNotionIdInUrls
 
+
+//구매를 하면, 구매자의 아이디를 해당 페이지의 속성에 넣음(여기서 속성은 buyer: string[])
+//if(getPrice >0 ){
+  // if(getPageProperty.buyer == id) {
+  //   url을 띄워주기
+  // } else {
+  //   결제 창 띄워주기
+  // }
+// }
+
+
 export const mapPageUrl =
-(site: Site, recordMap: ExtendedRecordMap, searchParams: URLSearchParams) =>
+(site: Site, recordMap: ExtendedRecordMap, searchParams: URLSearchParams, buy:boolean = false) =>
 (pageId = '') => {
     const pageUuid = parsePageId(pageId, { uuid: true })
     const block = recordMap.block[pageId]?.value
     const getPrice = getPageProperty<number>('Price',block,recordMap) || 0
     console.log(getPrice)
-    if(getPrice > 0 ){
-      if (uuidToId(pageUuid) === site.rootNotionPageId) {
-      return `http://localhost:3000/${site.rootNotionPageId}`
-      }
+    if(getPrice > 0 ){ //유료
+      // try{
+      //   axios.
+        
+      // }catch(err){
+
+      // }
     }
     else if(getPrice == 0){
       console.log("BB")
@@ -48,6 +64,7 @@ export const getCanonicalPageUrl =
   (site: Site, recordMap: ExtendedRecordMap) =>
   (pageId = '') => {
     const pageUuid = parsePageId(pageId, { uuid: true })
+    //만약에, (/spring-boot-dji2398)/(/db23jn2n4n2l3)
     if (uuidToId(pageId) === site.rootNotionPageId) {
       return `https://${site.domain}`
     } else {
@@ -57,7 +74,10 @@ export const getCanonicalPageUrl =
     }
   }
 
-  
+
+
+//slug
+//ex) spring-boot-dkalmo12903
 
 function createUrl(path: string, searchParams: URLSearchParams) {
   console.log([path, searchParams.toString()].filter(Boolean).join('?'))
