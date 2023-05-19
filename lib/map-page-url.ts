@@ -10,6 +10,8 @@ import { getPageProperty } from 'notion-utils'
 import { getPage } from './notion'
 import axios from 'axios'
 import { url } from 'inspector'
+import { strict } from 'assert'
+import { useState } from 'react'
 
 
 // include UUIDs in page URLs during local development but not in production
@@ -34,34 +36,46 @@ export const mapPageUrl =
     const block = recordMap.block[pageId]?.value
     const getPrice = getPageProperty<number>('Price',block,recordMap) || 0
     const title = getBlockTitle(block, recordMap) || site.name
+    let pcurl;
     console.log(getPrice)
-    if(getPrice > 0 ){ //유료
-      // try{
-      //   axios({
-      //     url: 'http://localhost:8085/kakaopay.cls',
-      //     data: {
-      //       cid : "TC0ONETIME",
-      //       partner_order_id : "partner_order_id",
-      //       partner_user_id :"partner_user_id",
-      //       quantity  : 1,
-      //       tax_free_amount :500,
-      //       approval_url: "http://localhost:8085/pay/success", 
-      //       cancel_url:"http://localhost:8085/pay/fail",
-      //       fail_url :"http://localhost:8085/pay/fail",
-      //       item_name: title,
-      //       total_amount: getPrice
-      //     }
-      //   }).then(function (response) {
-      //             console.log("Heade With Authentication :" + response)
-      //             console.log(response.data)
-      //             console.log(response.status)
-      //             console.log(response.statusText)
-      //             console.log(response.headers)
-      //             console.log(response.config)
-      //           })
-      // }catch(err){
-      //   console.error(err)
-      // }
+    if(getPrice > 0 ){ //유료인 블록은 axios로 넘김
+      try{
+        axios({
+          method: 'post',
+          url: 'http://localhost:8085/pay/kakaopay',
+          data: {
+            cid : "TC0ONETIME",
+            partner_order_id : "partner_order_id",
+            partner_user_id :"partner_user_id",
+            quantity  : 1,
+            approval_url: "http://localhost:8085/pay/success", 
+            cancel_url:"http://localhost:8085/pay/fail",
+            fail_url :"http://localhost:8085/pay/fail",
+            item_name: title,
+            total_amount: getPrice
+          },
+          headers: { 
+                      "Content-Type": "application/json; charset=utf-8;",
+                    }
+        }).then(function (response) { //post 성공 시
+                  console.log("Heade With Authentication :" + response)
+                  console.log(response.data)
+                  console.log(response.status)
+                  console.log(response.statusText)
+                  console.log(response.headers)
+                  console.log(response.config)
+                  console.log()
+                  const data =  response.data
+                  pcurl =  data.split(" , ")[1]
+                  
+                 return pcurl
+                }
+        )
+      }catch(err){
+        console.error(err)
+      }
+      console.log(pcurl)
+      
     }
     else if(getPrice == 0){
       console.log("BB")
