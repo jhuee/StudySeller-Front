@@ -1,5 +1,5 @@
 import { ExtendedRecordMap, Block } from 'notion-types'
-import { parsePageId, uuidToId } from 'notion-utils'
+import { getPageTitle, parsePageId, uuidToId, getBlockTitle } from 'notion-utils'
 
 import { includeNotionIdInUrls } from './config'
 import { getCanonicalPageId } from './get-canonical-page-id'
@@ -33,14 +33,10 @@ export const mapPageUrl =
     const pageUuid = parsePageId(pageId, { uuid: true })
     const block = recordMap.block[pageId]?.value
     const getPrice = getPageProperty<number>('Price',block,recordMap) || 0
+    const title = getBlockTitle(block, recordMap) || site.name
     console.log(getPrice)
     if(getPrice > 0 ){ //유료
-      // try{
-      //   axios.
-        
-      // }catch(err){
-
-      // }
+      
     }
     else if(getPrice == 0){
       console.log("BB")
