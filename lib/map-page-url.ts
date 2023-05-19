@@ -36,7 +36,32 @@ export const mapPageUrl =
     const title = getBlockTitle(block, recordMap) || site.name
     console.log(getPrice)
     if(getPrice > 0 ){ //유료
-      
+      // try{
+      //   axios({
+      //     url: 'http://localhost:8085/kakaopay.cls',
+      //     data: {
+      //       cid : "TC0ONETIME",
+      //       partner_order_id : "partner_order_id",
+      //       partner_user_id :"partner_user_id",
+      //       quantity  : 1,
+      //       tax_free_amount :500,
+      //       approval_url: "http://localhost:8085/pay/success", 
+      //       cancel_url:"http://localhost:8085/pay/fail",
+      //       fail_url :"http://localhost:8085/pay/fail",
+      //       item_name: title,
+      //       total_amount: getPrice
+      //     }
+      //   }).then(function (response) {
+      //             console.log("Heade With Authentication :" + response)
+      //             console.log(response.data)
+      //             console.log(response.status)
+      //             console.log(response.statusText)
+      //             console.log(response.headers)
+      //             console.log(response.config)
+      //           })
+      // }catch(err){
+      //   console.error(err)
+      // }
     }
     else if(getPrice == 0){
       console.log("BB")
