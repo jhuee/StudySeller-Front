@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, List, Segment, Menu, Dropdown, Input, Button,Header } from 'semantic-ui-react';
+import { Image, List, Segment, Menu, Dropdown, Input, Button,Header, Card } from 'semantic-ui-react';
 import { PageSocial } from './PageSocial';
 import * as config from '@/lib/config'
 import * as types from '@/lib/types'
@@ -124,8 +124,8 @@ return (
         </Menu.Menu>
       </Menu>
       <Header as='h1' style={{marginTop: 100, paddingLeft :70}} >둘러보기🍀</Header>
-      <Segment style={{marginRight:70 ,marginTop : 80, marginLeft: 70}} padded='very' size='big'>
-      <List animated celled size='large'>
+      <Segment style={{marginRight:35 ,marginTop : 80, marginLeft: 35}} padded='very' size='big' center>
+      {/* <List animated celled size='large'>
     <List.Item v>
       <Image size='mini' avatar src='http://localhost:3000/_next/image?url=https%3A%2F%2Fwww.notion.so%2Fimage%2Fhttps%253A%252F%252Fs3-us-west-2.amazonaws.com%252Fsecure.notion-static.com%252F6bd65d9f-b9af-432b-b06e-da596b40a2e4%252FIMG_7646.jpeg%3Ftable%3Dblock%26id%3Da684bdd9-8f5c-4ba0-bb93-252569b64cdd%26cache%3Dv2&w=2048&q=75' />
       <List.Content style={{paddigTop:10}} >
@@ -168,7 +168,126 @@ return (
         인하공업전문대학 컴퓨터시스템과19 #BackEnd
       </List.Content>
     </List.Item>
-  </List>
+  </List> */}
+      <Card.Group>
+      <Card href='/a684bdd98f5c4ba0bb93252569b64cdd'>
+    <Image src='http://localhost:3000/_next/image?url=https%3A%2F%2Fwww.notion.so%2Fimage%2Fhttps%253A%252F%252Fs3-us-west-2.amazonaws.com%252Fsecure.notion-static.com%252F6bd65d9f-b9af-432b-b06e-da596b40a2e4%252FIMG_7646.jpeg%3Ftable%3Dblock%26id%3Da684bdd9-8f5c-4ba0-bb93-252569b64cdd%26cache%3Dv2&w=2048&q=75' wrapped ui={false} />
+    <Card.Content>
+      <Card.Header>Juhee's Notion</Card.Header>
+      <Card.Description>
+        쮜의 코딩일기입니당
+      </Card.Description>
+    </Card.Content>
+    <Card.Content extra>
+      <a>
+        Let'go
+      </a>
+    </Card.Content>
+  </Card>
+  <Card href='/d2b4ea372f144b00b918231012c6c801'>
+    <Image  src='에어팟햄.png' wrapped ui={false} />
+    <Card.Content>
+      <Card.Header>HAMBA's Notion</Card.Header>
+      <Card.Description>
+        앙비의 코딩일기입니당
+      </Card.Description>
+    </Card.Content>
+    <Card.Content extra>
+      <a>
+        Let'go
+      </a>
+    </Card.Content>
+
+  </Card>
+  <Card href='/d2b4ea372f144b00b918231012c6c801'>
+    <Image  src='프사1.jpg' wrapped ui={false} />
+    <Card.Content>
+      <Card.Header>A-YEON</Card.Header>
+      <Card.Description>
+        인하공업전문대학 컴시과 20 #React
+      </Card.Description>
+    </Card.Content>
+    <Card.Content extra>
+      <a>
+        Let'go
+      </a>
+    </Card.Content>
+  </Card>
+
+  <Card href='/d2b4ea372f144b00b918231012c6c801'>
+    <Image  src='프사3.jpg' wrapped ui={false} />
+    <Card.Content>
+      <Card.Header>Jinu</Card.Header>
+      <Card.Description>
+        인하공업전문대학 컴시과 19학번 #React
+      </Card.Description>
+    </Card.Content>
+    <Card.Content extra>
+      <a>
+        Let'go
+      </a>
+    </Card.Content>
+  </Card>
+  
+  <Card href='/d2b4ea372f144b00b918231012c6c801'>
+    <Image  src='프사4.jpg' wrapped ui={false} />
+    <Card.Content>
+      <Card.Header>Minjuni</Card.Header>
+      <Card.Description>
+        인하공업전문대학 컴시과 19학번 #BackEnd
+      </Card.Description>
+    </Card.Content>
+    <Card.Content extra>
+      <a>
+        Let'go
+      </a>  
+    </Card.Content>
+  </Card>
+
+  <Card href='/d2b4ea372f144b00b918231012c6c801'>
+    <Image  src='프사5.jpg' wrapped ui={false} />
+    <Card.Content>
+      <Card.Header>Eun-Sun</Card.Header>
+      <Card.Description>
+        인하공업전문대학 컴시과 20학번
+      </Card.Description>
+    </Card.Content>
+    <Card.Content extra>
+      <a>
+        Let'go
+      </a>
+    </Card.Content>
+  </Card>
+  
+  <Card href='/d2b4ea372f144b00b918231012c6c801'>
+    <Image  src='프사7.jpg' wrapped ui={false} />
+    <Card.Content>
+      <Card.Header>Suno</Card.Header>
+      <Card.Description>
+        인하공업전문대학 컴시과 19학번 #React
+      </Card.Description>
+    </Card.Content>
+    <Card.Content extra>
+      <a>
+        Let'go
+      </a>
+    </Card.Content>
+  </Card>
+  <Card href='/d2b4ea372f144b00b918231012c6c801'>
+    <Image  src='프사6.jpg' wrapped ui={false} />
+    <Card.Content>
+      <Card.Header>Jinu</Card.Header>
+      <Card.Description>
+        인하공업전문대학 컴시과 19학번 #React
+      </Card.Description>
+    </Card.Content>
+    <Card.Content extra>
+      <a>
+        Let'go
+      </a>
+    </Card.Content>
+  </Card>
+      </Card.Group>
       </Segment>
     </Segment>
     </Segment.Group>
