@@ -9,7 +9,7 @@ Message,
 Segment,
 Menu
 } from "semantic-ui-react";
-
+import axios from "axios";
 
 const Signup: React.FC = () => {
 const [name, setName] = useState<string>("");
@@ -37,8 +37,34 @@ const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 event.preventDefault();
 console.log("Submitted form data:", { name, email, password, confirmPassword });
 // 여기에 폼 데이터를 서버로 전송하는 로직을 추가
-};
-
+    axios({
+        method: 'post',
+        url: 'http://localhost:8085/member/join',
+        data: {
+            userId : email,
+            userPw : password,
+            userName : name,
+            // userIntroduce : '김한비입니다',
+            // twitterId : '',
+            // youtubeId : '',
+            // notionId : 'a684bdd98f5c4ba0bb93252569b64cdd',
+            // snsId : ''
+        },
+        headers: { 
+            "Content-Type": "application/json",
+      
+          }
+        }).then(function (response) {
+          console.log("Heade With Authentication :" + response);
+          console.log(response.data)
+          console.log(response.status)
+          console.log(response.statusText)
+          console.log(response.headers)
+          console.log(response.config)
+        }).catch(function (error) {
+          console.log("Error : " +error);
+        });
+      }
 return (
 <Segment>
 <Menu style={{ backgroundColor: 'transparent' ,paddingTop : '5px'}} stackable inverted size='massive' fixed='top' >
