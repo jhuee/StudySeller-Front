@@ -11,7 +11,7 @@ Segment,
 } from "semantic-ui-react";
 import axios from "axios";
 import SignUp from "./SignUp"
-
+import MainPage from "./MainPage"
 
 //로그인 구현 함수
 //로그인을 하면 토큰을 얻고, 로그아웃을 하면 토큰을 제거한다. -> 우선순위x
@@ -44,15 +44,15 @@ const signUp =()=>{
   
 }
 
-const onClickSubmit = () => {
-
+const onClickSubmit = (id, pw) => {
+  console.log(id, pw)
   axios({
     method: 'POST',
-    url: `http://localhost:8085/member`,
+    url: `http://localhost:8085/member/login`,
     data: {
     
-      user_id: email,
-      user_pw: password,
+      userId: id,
+      userPw: pw,
     },
     headers: { 
       "Content-Type": "application/json",
@@ -65,10 +65,29 @@ const onClickSubmit = () => {
     console.log(response.statusText)
     console.log(response.headers)
     console.log(response.config)
+  
+    
+    if(response.data === "로그인 성공"){ //로그인에 성공했다면~
+      axios({
+        method: 'get',
+        url : 'http://localhost:8085/member/info'
+      }).then(function (response) {
+        console.log(response.data) //사용자의 노션id를 받아옴
+        router.push('/')
+        if(router.pathname == '/') {
+          
+        }
+      })
+
+    } else {
+      alert(response.data)
+    }
+    
   })
   .catch(function (error) {
     console.log("Error : " +error);
   });
+
 }
 
   return (
