@@ -11,7 +11,7 @@ import { getPage } from './notion'
 import axios from 'axios'
 import { url } from 'inspector'
 import { strict } from 'assert'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 // include UUIDs in page URLs during local development but not in production
@@ -36,9 +36,16 @@ export const mapPageUrl =
     const block = recordMap.block[pageId]?.value
     const getPrice = getPageProperty<number>('Price',block,recordMap) || 0
     const title = getBlockTitle(block, recordMap) || site.name
-    let pcurl;
     console.log(getPrice)
+    var result
+    const [pcurl , setPcurl] = useState([])
+
     if(getPrice > 0 ){ //유료인 블록은 axios로 넘김
+    const successUrl = createUrl( `http://localhost:3000/${getCanonicalPageId(pageUuid, recordMap, { uuid })}`,
+    searchParams
+  )
+      // console.log(successUrl)
+      useEffect(() =>{
       try{
         axios({
           method: 'post',
@@ -48,7 +55,7 @@ export const mapPageUrl =
             partner_order_id : "partner_order_id",
             partner_user_id :"partner_user_id",
             quantity  : 1,
-            approval_url: "http://localhost:8085/pay/success", 
+            approval_url: "http://localhost:8085/pay/succes",
             cancel_url:"http://localhost:8085/pay/fail",
             fail_url :"http://localhost:8085/pay/fail",
             item_name: title,
@@ -64,19 +71,16 @@ export const mapPageUrl =
                   console.log(response.statusText)
                   console.log(response.headers)
                   console.log(response.config)
-                  console.log()
-                  const data =  response.data
-                  pcurl =  data.split(" , ")[1]
-                  
-                 return pcurl
+                  setPcurl(response.data)
+                 
                 }
         )
       }catch(err){
         console.error(err)
-      }
-      console.log(pcurl)
-      
-    }
+      }},[])
+      return pcurl[1]
+    
+  }
     else if(getPrice == 0){
       console.log("BB")
     if (uuidToId(pageUuid) === site.rootNotionPageId) {
@@ -93,6 +97,8 @@ export const mapPageUrl =
       )
     }}}
   
+  
+
 //pageUuid = page id
 //uuid 는 boolean인데 뭐가 true이고 false인진 모르겠음
 export const getCanonicalPageUrl =
@@ -103,7 +109,7 @@ export const getCanonicalPageUrl =
     if (uuidToId(pageId) === site.rootNotionPageId) {
       return `https://${site.domain}`
     } else {
-      return `https://${site.domain}/${getCanonicalPageId(pageUuid, recordMap, {
+      return `https://locahlhost:3000/${getCanonicalPageId(pageUuid, recordMap, {
         uuid
       })}`
     }
