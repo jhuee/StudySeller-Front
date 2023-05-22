@@ -177,10 +177,13 @@ return (
       <Card.Description>
         쮜의 코딩일기입니당
       </Card.Description>
+      <Card.Meta>
+        #React
+      </Card.Meta>
     </Card.Content>
     <Card.Content extra>
       <a>
-        Let'go
+        Go 🌐
       </a>
     </Card.Content>
   </Card>
@@ -191,10 +194,13 @@ return (
       <Card.Description>
         앙비의 코딩일기입니당
       </Card.Description>
+      <Card.Meta>
+        #React
+      </Card.Meta>
     </Card.Content>
     <Card.Content extra>
       <a>
-        Let'go
+      Go 🌐
       </a>
     </Card.Content>
 
@@ -204,13 +210,17 @@ return (
     <Card.Content>
       <Card.Header>A-YEON</Card.Header>
       <Card.Description>
-        인하공업전문대학 컴시과 20 #React
+        인하공업전문대학 컴시과 20 
       </Card.Description>
+      <Card.Meta>
+        #React
+      </Card.Meta>
     </Card.Content>
     <Card.Content extra>
       <a>
-        Let'go
+      Go 🌐
       </a>
+      
     </Card.Content>
   </Card>
 
@@ -219,12 +229,15 @@ return (
     <Card.Content>
       <Card.Header>Jinu</Card.Header>
       <Card.Description>
-        인하공업전문대학 컴시과 19학번 #React
+        인하공업전문대학 컴시과 19학번
       </Card.Description>
+      <Card.Meta>
+        #React
+      </Card.Meta>
     </Card.Content>
     <Card.Content extra>
       <a>
-        Let'go
+      Go 🌐
       </a>
     </Card.Content>
   </Card>
@@ -239,7 +252,7 @@ return (
     </Card.Content>
     <Card.Content extra>
       <a>
-        Let'go
+        L
       </a>  
     </Card.Content>
   </Card>
